@@ -9,58 +9,160 @@
         @include('template/landing/navbar')
         <!-- Masthead-->
         <header class="masthead">
+        <section class="page-section" id="home">
             <div class="container">
                 <div class="masthead-heading text-uppercase">Healt Is Wealt</div>
                 <div class="masthead-subheading">To enjoy the glow of good healt you must exercise</div>
-                <a class="btn btn-primary btn-xl text-uppercase" href="#services">Tell Me More</a>
+                <a class="btn btn-primary btn-xl text-uppercase" href="#membership">Join A Member</a>
             </div>
+</section>
         </header>
         <!-- Services-->
-        <section class="page-section" id="services">
+        <section class="page-section" id="bmi">
             <div class="container">
                 <div class="text-center">
-                    <h2 class="section-heading text-uppercase">Services</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
-                </div>
-                <div class="row text-center">
-                    <div class="col-md-4">
-                        <span class="fa-stack fa-4x">
-                            <i class="fas fa-circle fa-stack-2x text-primary"></i>
-                            <i class="fas fa-shopping-cart fa-stack-1x fa-inverse"></i>
-                        </span>
-                        <h4 class="my-3">E-Commerce</h4>
-                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+                    <h2 class="section-heading text-uppercase">Kalkulator BMI</h2>
+<?php
+ 
+        if($_POST!=null)
+        {
+        $h=empty($_POST["height"]) ? 0 : $_POST["height"];
+        $w=empty($_POST["weight"]) ? 0 : $_POST["weight"];
+        $index =0;
+        if($h !=0 && $w !=0)
+            $index = round($w/($h*$h)* 703,2);
+
+        $bmi="";
+        $bmiStyle ="alert alert-primary";
+        if ($index < 18.5) {
+            $bmi ="underweight - BMI : " . $index;
+            $bmiStyle="alert alert-secondary";
+        } else if ($index < 25) {
+            $bmi ="normal - BMI : ". $index;
+            $bmiStyle ="alert alert-success";
+        } else if ($index < 30) {
+            $bmi ="overweight - BMI : " . $index;  
+            $bmiStyle ="alert alert-warning";
+        } else {
+            $bmi="obese - BMI : " .$index;  
+            $bmiStyle="alert alert-danger";
+        }
+    
+    }
+        ?>
+        <!DOCTYPE html>
+        <html lang="en-US">
+        <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        </head>
+
+            <div class="container">
+                <form method="post">
+                    <div class="form-group">
+                        <label for="height">Please Enter your Height in Inches :</label>
+                        <input type="text" class="form-control" name="height" placeholder="69">
                     </div>
-                    <div class="col-md-4">
-                        <span class="fa-stack fa-4x">
-                            <i class="fas fa-circle fa-stack-2x text-primary"></i>
-                            <i class="fas fa-laptop fa-stack-1x fa-inverse"></i>
-                        </span>
-                        <h4 class="my-3">Responsive Design</h4>
-                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+                    <div class="form-group">
+                        <label for="weight">Please Enter your weight in Pounds :</label>
+                        <input type="text" class="form-control"  name="weight" placeholder="150">
                     </div>
-                    <div class="col-md-4">
-                        <span class="fa-stack fa-4x">
-                            <i class="fas fa-circle fa-stack-2x text-primary"></i>
-                            <i class="fas fa-lock fa-stack-1x fa-inverse"></i>
-                        </span>
-                        <h4 class="my-3">Web Security</h4>
-                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success">Calculate</button>
                     </div>
-                </div>
-            </div>
-        </section>
+                    </form>
+                    <!-- <div class="" role="alert" id="bmi">
+                     <?php 
+                    // echo $bmi;
+                    // ?> -->
+                <!-- </div> -->
+                </div>  
+    </section>
+
         <!-- Portfolio Grid-->
-        <section class="page-section bg-light" id="portfolio">
+        <section class="page-section bg-light" id="membership">
             <div class="container">
                 <div class="text-center">
-                    <h2 class="section-heading text-uppercase">Portfolio</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                    <h2 class="section-heading text-uppercase">Membership</h2>
+                    <h3 class="section-subheading text-muted">Pilih Paket Untuk Merubah Diri Anda</h3>
                 </div>
-                <div class="row">
-                    <div class="col-lg-4 col-sm-6 mb-4">
+                <!-- price package section start -->
+<div class="container mt-5">
+  
+    <div class="card-wrapper">
+      <div class="row">
+        <div class="card-body col-md-4 col-12  mt-3 col-xs-6 col-lg-4 ">
+          <form action="{{url('/shopping-cart')}}" method="post"  id="cart-form">
+            @csrf
+            <div class="image-wrapper">
+                <img class="card-img" src="https://images.unsplash.com/photo-1518611012118-696072aa579a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" />
+            </div>
+            <div class="package-title ">
+                <h3 class="package-months bg-danger">3 Month Package</h3>
+                <input type="hidden" value="3 Month Package" name="package_duration"/>
+                <p class="price bg-sucess"><del>Rp.900.000</del> Rp.800.000</p>
+                <input type="hidden" value="₹4500" name="package_price"/>
+
+            </div>  
+            <div class="card-text">
+            Experience the ultimate convenience with our special 3-month Star Gym package. Get access to top-notch facilities, personalized training, and exclusive perks. Don't wait, seize this opportunity to transform your fitness journey today!
+            </div>
+            <!-- <div class="but-btn-wrapper mt-3"><a href="#" class="buy-button btn btn-danger">Add to Bag</a></div> -->
+            <input type="submit" class="buy-button btn btn-danger" value="Add to Bag"/>
+
+          </form>
+         </div>
+         <div class="card-body col-md-4 col-12 mt-3 col-xs-6 col-lg-4 ">
+           <form action="{{url('/shopping-cart')}}" method="post"  id="cart-form">
+                      @csrf
+            <div class="image-wrapper">
+                <img class="card-img" src="https://images.unsplash.com/photo-1571731956672-f2b94d7dd0cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1772&q=80"/>
+            </div>
+            <div class="package-title ">
+                <h3 class="package-months bg-danger">6 Month Package</h3>
+                <input type="hidden" value="6 Month Package" name="package_duration"/>
+                <p class="price bg-sucess"><del>Rp.1.500.000</del> Rp.1.200.000</p>
+                <input type="hidden" value="₹8000" name="package_price"/>
+            </div>  
+            <div class="card-text">
+            Upgrade your fitness commitment with our 6-month Star Gym package. Unleash your potential with extended access to premium facilities, personalized training, and exclusive member benefits. Don't hesitate, embark on a transformative fitness journey now!
+            </div>
+            <!-- <div class="but-btn-wrapper mt-2"><a href="#" class="buy-button btn btn-danger">Add to Bag</a></div> -->
+            <input type="submit" class="buy-button btn btn-danger" value="Add to Bag"/>
+
+
+          </form>
+         </div>
+     
+         <div class="card-body col-md-4 col-12 col-xs-12 mt-3 col-lg-4">
+          <form action="{{url('/shopping-cart')}}" method="post"  id="cart-form">
+                 @csrf
+            <div class="image-wrapper">
+                <img  class="card-img" src="https://images.unsplash.com/photo-1574680088814-c9e8a10d8a4d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1769&q=80"/>
+            </div>
+            <div class="package-title ">
+                <h3 class="package-months bg-danger">12 Month Package</h3>
+                <input type="hidden" value="12 Month Package" name="package_duration"/>
+
+                <p class="price bg-sucess"><del>Rp.2.000.000</del> Rp.1.800.000</p>
+                <input type="hidden" value="₹12000" name="package_price"/>
+
+            </div>  
+            <div class="card-text">
+            Elevate your fitness journey with our 12-month Star Gym package. Unlock a year of unlimited access to state-of-the-art facilities, expert guidance, and exclusive member perks. Don't miss out on this transformative opportunity to achieve your fitness goals!
+            </div>
+            <input type="submit" class="buy-button btn btn-danger" value="Add to Bag"/>
+         </div>
+        </div>
+      </div>
+    </form>
+</div>
+                <!-- <div class="row">
+                    <div class="col-lg-4 col-sm-6 mb-4"> -->
                         <!-- Portfolio item 1-->
-                        <div class="portfolio-item">
+                        <!-- <div class="portfolio-item">
                             <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal1">
                                 <div class="portfolio-hover">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
@@ -72,10 +174,10 @@
                                 <div class="portfolio-caption-subheading text-muted">Illustration</div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6 mb-4">
+                    </div> -->
+                    <!-- <div class="col-lg-4 col-sm-6 mb-4"> -->
                         <!-- Portfolio item 2-->
-                        <div class="portfolio-item">
+                        <!-- <div class="portfolio-item">
                             <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal2">
                                 <div class="portfolio-hover">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
@@ -87,10 +189,10 @@
                                 <div class="portfolio-caption-subheading text-muted">Graphic Design</div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6 mb-4">
+                    </div> -->
+                    <!-- <div class="col-lg-4 col-sm-6 mb-4"> -->
                         <!-- Portfolio item 3-->
-                        <div class="portfolio-item">
+                        <!-- <div class="portfolio-item">
                             <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal3">
                                 <div class="portfolio-hover">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
@@ -102,10 +204,10 @@
                                 <div class="portfolio-caption-subheading text-muted">Identity</div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6 mb-4 mb-lg-0">
+                    </div> -->
+                    <!-- <div class="col-lg-4 col-sm-6 mb-4 mb-lg-0"> -->
                         <!-- Portfolio item 4-->
-                        <div class="portfolio-item">
+                        <!-- <div class="portfolio-item">
                             <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal4">
                                 <div class="portfolio-hover">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
@@ -117,10 +219,10 @@
                                 <div class="portfolio-caption-subheading text-muted">Branding</div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6 mb-4 mb-sm-0">
+                    </div> -->
+                    <!-- <div class="col-lg-4 col-sm-6 mb-4 mb-sm-0"> -->
                         <!-- Portfolio item 5-->
-                        <div class="portfolio-item">
+                        <!-- <div class="portfolio-item">
                             <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal5">
                                 <div class="portfolio-hover">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
@@ -132,10 +234,10 @@
                                 <div class="portfolio-caption-subheading text-muted">Website Design</div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
+                    </div> -->
+                    <!-- <div class="col-lg-4 col-sm-6"> -->
                         <!-- Portfolio item 6-->
-                        <div class="portfolio-item">
+                        <!-- <div class="portfolio-item">
                             <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal6">
                                 <div class="portfolio-hover">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
@@ -148,14 +250,14 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                </div> -->
+            <!-- </div> -->
         </section>
         <!-- About-->
-        <section class="page-section" id="about">
+        <section class="page-section" id="artikel">
             <div class="container">
                 <div class="text-center">
-                    <h2 class="section-heading text-uppercase">About</h2>
+                    <h2 class="section-heading text-uppercase">Artikel</h2>
                     <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
                 </div>
                 <ul class="timeline">
@@ -218,47 +320,44 @@
             <div class="container">
                 <div class="text-center">
                     <h2 class="section-heading text-uppercase">Our Amazing Team</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                    <h3 class="section-subheading text-muted">Proyek 2 Kelompok 5 D3TI2A</h3>
                 </div>
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="team-member">
                             <img class="mx-auto rounded-circle" src="{{ asset(('template/assets/img/team/1.jpg')) }}" alt="..." />
-                            <h4>Parveen Anand</h4>
-                            <p class="text-muted">Lead Designer</p>
-                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand Twitter Profile"><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand Facebook Profile"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
+                            <h4>Abdurokhim</h4>
+                            <p class="text-muted">2203001</p>
+                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Abdurokhim Twitter Profile"><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Abdurokhim Facebook Profile"><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Abdurokhim LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="team-member">
                             <img class="mx-auto rounded-circle" src="{{ asset(('template/assets/img/team/2.jpg')) }}" alt="..." />
-                            <h4>Diana Petersen</h4>
-                            <p class="text-muted">Lead Marketer</p>
-                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Diana Petersen Twitter Profile"><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Diana Petersen Facebook Profile"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Diana Petersen LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
+                            <h4>Rika Febriani</h4>
+                            <p class="text-muted">2203025</p>
+                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Rika Febriani Twitter Profile"><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Rika Febriani Facebook Profile"><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Rika Febriani LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="team-member">
                             <img class="mx-auto rounded-circle" src="{{ asset(('template/assets/img/team/3.jpg')) }}" alt="..." />
-                            <h4>Larry Parker</h4>
-                            <p class="text-muted">Lead Developer</p>
-                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Larry Parker Twitter Profile"><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Larry Parker Facebook Profile"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Larry Parker LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
+                            <h4>Indah Ni'matussilfah</h4>
+                            <p class="text-muted">2203015</p>
+                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Indah Nimatussilfah Twitter Profile"><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Indah Nimatussilfah Facebook Profile"><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Indah Nimatussilfah LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-8 mx-auto text-center"><p class="large text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p></div>
                 </div>
             </div>
         </section>
         <!-- Clients-->
-        <div class="py-5">
+        <!-- <div class="py-5">
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-md-3 col-sm-6 my-3">
@@ -275,7 +374,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <!-- Contact-->
         <section class="page-section" id="contact">
             <div class="container">
@@ -344,7 +443,7 @@
         <footer class="footer py-4">
             <div class="container">
                 <div class="row align-items-center">
-                    <div class="col-lg-4 text-lg-start">Copyright &copy; Your Website 2023</div>
+                    <div class="col-lg-4 text-lg-start">Copyright &copy; CPO Fitness Website 2023</div>
                     <div class="col-lg-4 my-3 my-lg-0">
                         <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
                         <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
