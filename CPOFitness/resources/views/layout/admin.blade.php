@@ -198,7 +198,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item menu-open">
-            <a href="#" class="nav-link active">
+            <a href="/home" class="nav-link active">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -295,11 +295,11 @@
               </li>
             </ul>
           </li> -->
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-chart-pie"></i>
               <p>
-                Charts
+                Charts -->
                 <!-- <i class="right fas fa-angle-left"></i> -->
               </p>
             </a>
@@ -330,11 +330,11 @@
               </li>
             </ul>
           </li> -->
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-tree"></i>
               <p>
-                UI Elements
+                UI Elements -->
                 <!-- <i class="fas fa-angle-left right"></i> -->
               </p>
             </a>
@@ -389,11 +389,11 @@
               </li>
             </ul>
           </li> -->
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
               <p>
-                Forms
+                Forms -->
                 <!-- <i class="fas fa-angle-left right"></i> -->
               </p>
             </a>
@@ -425,10 +425,16 @@
             </ul>
           </li> -->
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="/paket" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
               <p>
-                Tables
+                Paket Member
+              </p>
+          <li class="nav-item">
+            <a href="/artikel" class="nav-link">
+              <i class="nav-icon fas fa-table"></i>
+              <p>
+                Artikel
                 <!-- <i class="fas fa-angle-left right"></i> -->
               </p>
             </a>
